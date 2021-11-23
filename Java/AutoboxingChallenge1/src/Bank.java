@@ -12,4 +12,12 @@ public class Bank {
             branches.add(branch);
         }
     }
+
+    public void addNewTransaction(String c_Name, double amount){
+        for(int i = 0; i < branches.size(); i++){
+            if(branches.get(i).customers.get(i).name == c_Name){ //if name matches what exists in a branch we have
+                branches.get(i).customers.get(i).transactions.add(amount); //add an amount to their transaction
+            }
+        }
+    }
 }
