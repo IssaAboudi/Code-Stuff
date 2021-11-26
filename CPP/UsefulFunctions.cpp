@@ -357,3 +357,44 @@ float Issa::operator[](int index) {
 	}
 }
 
+std::vector<std::string> Issa::breakString(std::string inString, char delim){
+    //This function is about splitting a string into smaller strings using a specified delimiter.
+
+    std::vector<std::string> collection; //holds all of the broken up strings
+    std::string part; //temporarily holds each of the broken strings to add to collection
+
+    //holds location of things in the string (start, end, delim etc)
+    unsigned long startPos = 0; //references first character of the string
+    unsigned long delimPos = 0; //references first delimiter
+    unsigned long endPos = inString.size(); //references last character of string
+
+    //initializes the positions
+    if(inString.find(delim) == std::string::npos) { //if not found in string
+        delimPos = inString.size(); //store pos last character in string
+    } else {
+        delimPos = inString.find(delim); //store pos where delim found in string
+    }
+
+    //Loop goes through the bigger string and breaks down each part of the string according to the delimiter
+    do {
+        if (startPos == endPos) { //if reached the end of the string
+            break; //break out of the loop
+        }
+        part = inString.substr(startPos, delimPos - startPos); //stores part (leading up to the delim) in string
+        if (delimPos + 1 < endPos){
+            delimPos++; //moving one character past the delim in the string
+        }
+        startPos = delimPos; //stores next part after delim (leading up to next delim)
+        if(inString.find(delim, delimPos) == std::string::npos) { //if not found in string
+            delimPos = inString.size(); //store pos last character in string
+        } else {
+            delimPos = inString.find(delim, delimPos); //store pos where delim found in string
+        }
+
+        collection.push_back(part); //add part to the vector
+    } while(delimPos != std::string::npos);
+
+
+    return collection;
+}
+

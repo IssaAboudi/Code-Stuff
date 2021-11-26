@@ -70,4 +70,6 @@ namespace Issa {
 	friend std::ostream& operator<<(std::ostream& output, const InventoryItem& rval);
 
 	float operator[](int index);
+
+    std::vector<std::string> breakString(std::string inString, char delim);
 }
